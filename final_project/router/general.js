@@ -80,7 +80,7 @@ public_users.get('/isbn/:isbn',function (req, res) {
 // Get book details based on author using async-await
 public_users.get('/author-async/:author', async function (req, res) {
     try {
-        const response = await axios.get(`http://localhost:5000/isbn/${req.params.author}`);
+        const response = await axios.get(`http://localhost:5000/author/${req.params.author}`);
         console.log(response);
         return res.status(200).json(response.data);
     } catch (error) {
@@ -97,6 +97,17 @@ public_users.get('/author/:author',function (req, res) {
     }
   }
   return res.status(404).json({message: `There's no book with author name ${req.params.author}`})
+});
+
+// Get all books based on title using async-await
+public_users.get('/title-async/:title', async function (req, res) {
+    try {
+        const response = await axios.get(`http://localhost:5000/title/${req.params.title}`);
+        console.log(response);
+        return res.status(200).json(response.data);
+    } catch (error) {
+        return res.status(500).json({ message: "Error fetching book", error: error.message });
+    }
 });
 
 // Get all books based on title
